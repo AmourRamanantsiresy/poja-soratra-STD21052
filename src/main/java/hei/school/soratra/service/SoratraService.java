@@ -25,7 +25,8 @@ public class SoratraService {
 
   public FileUrls getOne(String id) {
     String transformedFileId = this.transformFileId(id);
-    String originalUrl = bucketComponent.presign(id, this.URL_expiration).toString();
+    String originalUrl =
+        bucketComponent.presign(this.addExtension(id), this.URL_expiration).toString();
     String transformedUrl =
         bucketComponent.presign(transformedFileId, this.URL_expiration).toString();
 
@@ -33,6 +34,10 @@ public class SoratraService {
   }
 
   private String transformFileId(String id) {
-    return id + "-transformed";
+    return this.addExtension(id + "-transformed");
+  }
+
+  private String addExtension(String name) {
+    return name + ".txt";
   }
 }

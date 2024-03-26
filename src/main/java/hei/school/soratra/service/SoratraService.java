@@ -19,7 +19,7 @@ public class SoratraService {
   public void save(String id, String text) throws IOException {
     File originalTextFile = textFileHandler.textToTXTFile(text);
     File transformedTextFile = textFileHandler.textToTXTFile(text.toUpperCase());
-    bucketComponent.upload(originalTextFile, id);
+    bucketComponent.upload(originalTextFile, this.addExtension(id));
     bucketComponent.upload(transformedTextFile, this.transformFileId(id));
   }
 
